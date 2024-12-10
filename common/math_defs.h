@@ -27,10 +27,15 @@ static const union msvc_inf_hack {
 #endif
 
 #ifndef HAVE_LOG2F
+#define HAVE_LOG2F (defined(log2f) || (__STDC_VERSION__ >= 199901L))
+
+#if !HAVE_LOG2F
 static inline float log2f(float f)
 {
     return logf(f) / logf(2.0f);
 }
+#endif
+
 #endif
 
 #ifndef HAVE_CBRTF
